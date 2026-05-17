@@ -1,0 +1,72 @@
+<ion-header>
+  <ion-toolbar class="main-toolbar">
+    <ion-title class="main-title">
+      {{ id ? 'Editar Juego' : 'Nuevo Juego' }}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="form-content ion-padding">
+
+  <ion-fab vertical="top" horizontal="start" slot="fixed">
+    <ion-fab-button class="fab-back" routerLink="/videojuegos">
+      <ion-icon name="arrow-back"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <div class="preview-card">
+    <img
+      [src]="videojuego.imagen_url || 'assets/icon/image.png'"
+      (error)="imagenError($event)"
+      alt="preview"
+      class="preview-img"
+    />
+    <div class="overlay">
+      <h2>{{ videojuego.titulo || '......' }}</h2>
+    </div>
+  </div>
+
+  <div class="form-card">
+
+    <ion-item class="field-item">
+      <ion-label position="stacked" class="field-label">Título</ion-label>
+      <ion-input class="field-input" [(ngModel)]="videojuego.titulo"></ion-input>
+    </ion-item>
+
+    <ion-item class="field-item">
+      <ion-label position="stacked" class="field-label">Plataforma</ion-label>
+      <ion-input class="field-input" [(ngModel)]="videojuego.plataforma"></ion-input>
+    </ion-item>
+
+    <div class="fields-row">
+      <ion-item class="field-item half">
+        <ion-label position="stacked" class="field-label">Precio</ion-label>
+        <ion-input class="field-input" type="number" min="0" [(ngModel)]="videojuego.precio"></ion-input>
+      </ion-item>
+      <ion-item class="field-item half">
+        <ion-label position="stacked" class="field-label">Stock</ion-label>
+        <ion-input class="field-input" type="number" min="0" [(ngModel)]="videojuego.stock"></ion-input>
+      </ion-item>
+    </div>
+
+    <ion-item class="field-item">
+      <ion-label position="stacked" class="field-label">Categoría</ion-label>
+      <ion-input class="field-input" [(ngModel)]="videojuego.categoria"></ion-input>
+    </ion-item>
+
+    <ion-item class="field-item">
+      <ion-label position="stacked" class="field-label">URL de imagen</ion-label>
+      <ion-input class="field-input" [(ngModel)]="videojuego.imagen_url"></ion-input>
+    </ion-item>
+
+    <ion-button
+      class="btn-save"
+      expand="block"
+      [disabled]="videojuego.precio < 0 || videojuego.stock < 0"
+      (click)="guardar()">
+      Guardar
+    </ion-button>
+
+  </div>
+
+</ion-content>

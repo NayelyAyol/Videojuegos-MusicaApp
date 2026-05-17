@@ -34,4 +34,39 @@
 
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
-@import '@ionic/angular/css/palettes/dark.system.css';
+@import "@ionic/angular/css/palettes/dark.system.css";
+.toast-success::part(container),
+.toast-error::part(container) {
+  --background: #ffffff;
+  --color: #0f172a;
+
+  background: #ffffff !important;
+  color: #0f172a !important;
+
+  border-radius: 14px;
+
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+
+  padding: 14px 16px;
+
+  border-bottom: 4px solid;
+
+  font-family: "Nunito", sans-serif;
+  font-weight: 700;
+}
+
+.toast-success::part(container) {
+  border-bottom-color: #22c55e;
+}
+
+.toast-error::part(container) {
+  border-bottom-color: #ef4444;
+}
+
+.toast-success::part(message),
+.toast-error::part(message) {
+  color: #0f172a !important;
+
+  font-family: "Nunito", sans-serif;
+  font-weight: 700;
+}

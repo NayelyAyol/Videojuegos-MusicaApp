@@ -1,0 +1,69 @@
+<ion-header>
+  <ion-toolbar class="main-toolbar">
+    <ion-title class="main-title">Catálogo de Videojuegos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="main-content ion-padding">
+
+  <ion-grid>
+    <ion-row>
+      <ion-col
+        size="12"
+        size-md="6"
+        size-lg="4"
+        *ngFor="let juego of videojuegos">
+
+        <ion-card class="game-card">
+
+          <div class="card-image-wrapper">
+            <img
+              [src]="juego.imagen_url || 'assets/icon/image.png'"
+              (error)="imagenError($event)"
+              alt="imagen"
+              class="game-image"
+            />
+            <span class="platform-chip">{{ juego.plataforma }}</span>
+          </div>
+
+          <ion-card-content class="card-body">
+
+            <h2 class="game-title">{{ juego.titulo }}</h2>
+
+            <div class="meta-row">
+              <div class="meta-item">
+                <span class="meta-label">Categoría</span>
+                <span class="meta-value">{{ juego.categoria }}</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">Stock</span>
+                <span class="meta-value">{{ juego.stock }} uds.</span>
+              </div>
+            </div>
+
+            <div class="card-footer">
+              <span class="price">${{ juego.precio }}</span>
+              <div class="botones">
+                <ion-button size="small" class="btn-edit" [routerLink]="['/videojuegos-form', juego.id]">
+                  Editar
+                </ion-button>
+                <ion-button size="small" class="btn-delete" (click)="confirmarEliminar(juego.id!)">
+                  Eliminar
+                </ion-button>
+              </div>
+            </div>
+
+          </ion-card-content>
+        </ion-card>
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button class="fab-main" routerLink="/videojuegos-form">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>
