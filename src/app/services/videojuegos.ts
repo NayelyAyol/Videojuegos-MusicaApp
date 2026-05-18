@@ -2,20 +2,22 @@ import { Injectable } from '@angular/core';
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import { environment } from '../../environments/environment';
 
-export interface Videojuego {
+export interface Cancion {
   id?: number;
   titulo: string;
-  plataforma: string;
-  precio: number;
-  stock: number;
-  categoria?: string;
+  artista: string;
+  ranking: number;
+  anio: number;
+  categorias: string;
   imagen_url?: string;
+  video_url?: string;
+  audio_url?: string;
 }
 
 @Injectable({
   providedIn: 'root'
 })
-export class VideojuegosService {
+export class CancionService {
 
   private supabase: SupabaseClient;
 
@@ -28,39 +30,39 @@ export class VideojuegosService {
 
   async listar() {
     const { data, error } = await this.supabase
-      .from('videojuegos')
+      .from('canciones')
       .select('*')
       .order('id', { ascending: false });
 
     if (error) throw error;
-    return data as Videojuego[];
+    return data as Cancion[];
   }
 
   async obtenerPorId(id: number) {
     const { data, error } = await this.supabase
-      .from('videojuegos')
+      .from('canciones')
       .select('*')
       .eq('id', id)
       .single();
 
     if (error) throw error;
-    return data as Videojuego;
+    return data as Cancion;
   }
 
-  async crear(videojuego: Videojuego) {
+  async crear(cancion: Cancion) {
     const { data, error } = await this.supabase
-      .from('videojuegos')
-      .insert(videojuego)
+      .from('canciones')
+      .insert(cancion)
       .select();
 
     if (error) throw error;
     return data;
   }
 
-  async actualizar(id: number, videojuego: Videojuego) {
+  async actualizar(id: number, cancion: Cancion) {
     const { data, error } = await this.supabase
-      .from('videojuegos')
-      .update(videojuego)
+      .from('canciones')
+      .update(cancion)
       .eq('id', id)
       .select();
 
@@ -70,7 +72,7 @@ export class VideojuegosService {
 
   async eliminar(id: number) {
     const { error } = await this.supabase
-      .from('videojuegos')
+      .from('canciones')
       .delete()
       .eq('id', id);
 

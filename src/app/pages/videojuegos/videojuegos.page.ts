@@ -10,10 +10,14 @@ IonCardContent,
 IonIcon} from '@ionic/angular/standalone';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { VideojuegosService, Videojuego } from '../../services/videojuegos';
+import { CancionService, Cancion } from '../../services/videojuegos';
 import { AlertController } from '@ionic/angular';
 import { addIcons } from 'ionicons';
 import { add } from 'ionicons/icons';
+import {
+  DomSanitizer,
+  SafeResourceUrl
+} from '@angular/platform-browser';
 
 addIcons({
   add
@@ -37,14 +41,48 @@ IonCardContent,
 IonIcon
   ]
 })
+
+
 export class VideojuegosPage implements OnInit {
 
-  videojuegos: Videojuego[] = [];
+  videojuegos: Cancion[] = [];
 
-  constructor(private videojuegosService: VideojuegosService, private alertController: AlertController) {}
+  constructor(
+    private cancionService: CancionService, 
+    private alertController: AlertController,
+    private sanitizer: DomSanitizer
+) {}
 
   imagenError(event: any) {
     event.target.src = 'assets/icon/image.png';
+  }
+
+  obtenerVideoEmbed(url: string): SafeResourceUrl {
+    let videoId = '';
+
+    if (url.includes('watch?v=')) {
+
+      videoId = url.split('watch?v=')[1];
+
+      if (videoId.includes('&')) {
+        videoId = videoId.split('&')[0];
+      }
+
+    }
+    else if (url.includes('youtu.be/')) {
+
+      videoId = url.split('youtu.be/')[1];
+
+      if (videoId.includes('?')) {
+        videoId = videoId.split('?')[0];
+      }
+
+    }
+
+    return this.sanitizer.bypassSecurityTrustResourceUrl(
+      `https://www.youtube.com/embed/${videoId}`
+    );
+
   }
 
   ngOnInit() {
@@ -56,18 +94,18 @@ export class VideojuegosPage implements OnInit {
   }
 
   async cargar() {
-    this.videojuegos = await this.videojuegosService.listar();
+    this.videojuegos = await this.cancionService.listar();
   }
 
   async eliminar(id: number) {
-    await this.videojuegosService.eliminar(id);
+    await this.cancionService.eliminar(id);
     await this.cargar();
   }
 
   async confirmarEliminar(id: number) {
 
   const alert = await this.alertController.create({
-    message: '¿Deseas eliminar este videojuego?',
+    message: '¿Deseas eliminar esta canción?',
 
     cssClass: 'custom-alert',
 
