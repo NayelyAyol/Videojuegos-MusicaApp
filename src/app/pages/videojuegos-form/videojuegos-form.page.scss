@@ -43,6 +43,33 @@
   filter: brightness(0.5);
 }
 
+.btn-upload {
+  --background: #7c3aed;
+  --background-hover: #6d28d9;
+  --background-activated: #6d28d9;
+  --color: #ffffff;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 0.85rem;
+  border-radius: 12px;
+  width: 100%;
+  margin-top: 6px;
+}
+
+.audio-ok {
+  color: #22c55e;
+  font-weight: 800;
+  text-align: center;
+  margin-top: 10px;
+  font-family: 'Nunito', sans-serif;
+}
+
+.audio-player {
+  width: 100%;
+  margin-top: 10px;
+  display: block;
+}
+
 .overlay {
   position: absolute;
   inset: 0;

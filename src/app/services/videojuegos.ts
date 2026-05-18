@@ -34,7 +34,10 @@ export class CancionService {
       .select('*')
       .order('id', { ascending: false });
 
-    if (error) throw error;
+    if (error) {
+      throw error;
+    }
+
     return data as Cancion[];
   }
 
@@ -45,7 +48,10 @@ export class CancionService {
       .eq('id', id)
       .single();
 
-    if (error) throw error;
+    if (error) {
+      throw error;
+    }
+
     return data as Cancion;
   }
 
@@ -55,7 +61,10 @@ export class CancionService {
       .insert(cancion)
       .select();
 
-    if (error) throw error;
+    if (error) {
+      throw error;
+    }
+
     return data;
   }
 
@@ -66,7 +75,10 @@ export class CancionService {
       .eq('id', id)
       .select();
 
-    if (error) throw error;
+    if (error) {
+      throw error;
+    }
+
     return data;
   }
 
@@ -76,6 +88,38 @@ export class CancionService {
       .delete()
       .eq('id', id);
 
-    if (error) throw error;
+    if (error) {
+      throw error;
+    }
+  }
+
+
+  async subirArchivo(bucket: string, fileName: string, file: File) {
+
+    const filePath = `uploads/${fileName}`;
+
+    const { data, error } = await this.supabase
+      .storage
+      .from(bucket)
+      .upload(filePath, file, {
+        cacheControl: '3600',
+        upsert: true
+      });
+
+    if (error) {
+      throw error;
+    }
+
+    const { data: urlData } = this.supabase
+      .storage
+      .from(bucket)
+      .getPublicUrl(filePath);
+
+    return {
+      data: {
+        publicUrl: urlData.publicUrl
+      },
+      error: null
+    };
   }
 }

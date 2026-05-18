@@ -10,9 +10,7 @@
 
   <ion-fab vertical="top" horizontal="start" slot="fixed">
 
-    <ion-fab-button
-      class="fab-back"
-      routerLink="/videojuegos">
+    <ion-fab-button class="fab-back" routerLink="/videojuegos">
 
       <ion-icon name="arrow-back"></ion-icon>
 
@@ -22,12 +20,8 @@
 
   <div class="preview-card">
 
-    <img
-      [src]="videojuego.imagen_url || 'assets/icon/image.png'"
-      (error)="imagenError($event)"
-      alt="preview"
-      class="preview-img"
-    />
+    <img [src]="previewImagen || videojuego.imagen_url || 'assets/icon/image.png'" (error)="imagenError($event)"
+      alt="preview" class="preview-img" />
 
     <div class="overlay">
       <h2>{{ videojuego.titulo || '......' }}</h2>
@@ -39,17 +33,13 @@
 
     <ion-item class="field-item">
 
-      <ion-label
-        position="stacked"
-        class="field-label">
+      <ion-label position="stacked" class="field-label">
 
         Título
 
       </ion-label>
 
-      <ion-input
-        class="field-input"
-        [(ngModel)]="videojuego.titulo">
+      <ion-input class="field-input" [(ngModel)]="videojuego.titulo">
 
       </ion-input>
 
@@ -57,17 +47,13 @@
 
     <ion-item class="field-item">
 
-      <ion-label
-        position="stacked"
-        class="field-label">
+      <ion-label position="stacked" class="field-label">
 
         Artista
 
       </ion-label>
 
-      <ion-input
-        class="field-input"
-        [(ngModel)]="videojuego.artista">
+      <ion-input class="field-input" [(ngModel)]="videojuego.artista">
 
       </ion-input>
 
@@ -77,19 +63,13 @@
 
       <ion-item class="field-item half">
 
-        <ion-label
-          position="stacked"
-          class="field-label">
+        <ion-label position="stacked" class="field-label">
 
           Ranking
 
         </ion-label>
 
-        <ion-input
-          class="field-input"
-          type="number"
-          min="0"
-          [(ngModel)]="videojuego.ranking">
+        <ion-input class="field-input" type="number" min="0" [(ngModel)]="videojuego.ranking">
 
         </ion-input>
 
@@ -97,19 +77,13 @@
 
       <ion-item class="field-item half">
 
-        <ion-label
-          position="stacked"
-          class="field-label">
+        <ion-label position="stacked" class="field-label">
 
           Año
 
         </ion-label>
 
-        <ion-input
-          class="field-input"
-          type="number"
-          min="0"
-          [(ngModel)]="videojuego.anio">
+        <ion-input class="field-input" type="number" min="0" [(ngModel)]="videojuego.anio">
 
         </ion-input>
 
@@ -119,80 +93,69 @@
 
     <ion-item class="field-item">
 
-      <ion-label
-        position="stacked"
-        class="field-label">
+      <ion-label position="stacked" class="field-label">
 
         Categoría
 
       </ion-label>
 
-      <ion-input
-        class="field-input"
-        [(ngModel)]="videojuego.categorias">
+      <ion-input class="field-input" [(ngModel)]="videojuego.categorias">
 
       </ion-input>
+
+    </ion-item>
+
+    <ion-item class="field-item file-item">
+
+      <ion-label position="stacked" class="field-label">
+        Imagen
+      </ion-label>
+
+      <ion-button class="btn-upload" (click)="fileImage.click()">
+        Subir imagen
+      </ion-button>
+
+      <input #fileImage type="file" accept="image/*" hidden (change)="subirImagen($event)" />
 
     </ion-item>
 
     <ion-item class="field-item">
 
-      <ion-label
-        position="stacked"
-        class="field-label">
+      <ion-label position="stacked" class="field-label">
 
-        URL de imagen
+        Video
 
       </ion-label>
 
-      <ion-input
-        class="field-input"
-        [(ngModel)]="videojuego.imagen_url">
+      <ion-input class="field-input" [(ngModel)]="videojuego.video_url">
 
       </ion-input>
 
     </ion-item>
 
-    <ion-item class="field-item">
+    <ion-item class="field-item file-item">
 
-      <ion-label
-        position="stacked"
-        class="field-label">
-
-        URL Video
-
+      <ion-label position="stacked" class="field-label">
+        Audio
       </ion-label>
 
-      <ion-input
-        class="field-input"
-        [(ngModel)]="videojuego.video_url">
+      <p *ngIf="audioSubido" class="audio-ok">
+        ✔ Audio cargado correctamente
+      </p>
 
-      </ion-input>
+      <audio *ngIf="videojuego.audio_url" controls class="audio-player">
+        <source [src]="videojuego.audio_url" type="audio/mp3">
+      </audio>
+
+      <ion-button class="btn-upload" (click)="fileAudio.click()">
+        Subir audio
+      </ion-button>
+
+      <input #fileAudio type="file" accept="audio/*" hidden (change)="subirAudio($event)" />
 
     </ion-item>
 
-    <ion-item class="field-item">
-
-      <ion-label
-        position="stacked"
-        class="field-label">
-
-        URL del audio
-
-      </ion-label>
-
-      <ion-input
-        class="field-input"
-        [(ngModel)]="videojuego.audio_url">
-
-      </ion-input>
-
-    </ion-item>
-
-    <ion-button
-      class="btn-save"
-      expand="block"
-      [disabled]="videojuego.ranking < 0 || videojuego.anio < 0"
+    <ion-button class="btn-save" expand="block" [disabled]="videojuego.ranking < 0 || videojuego.anio < 0"
       (click)="guardar()">
 
       Guardar

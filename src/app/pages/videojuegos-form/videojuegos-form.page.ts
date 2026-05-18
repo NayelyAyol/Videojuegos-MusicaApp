@@ -18,6 +18,7 @@ import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CancionService, Cancion } from '../../services/videojuegos';
 import { ToastController } from '@ionic/angular';
+import { CommonModule } from '@angular/common';
 
 addIcons({ arrowBack });
 
@@ -27,6 +28,7 @@ addIcons({ arrowBack });
   templateUrl: './videojuegos-form.page.html',
   standalone: true,
   imports: [
+    CommonModule,
     FormsModule,
     IonHeader,
     IonToolbar,
@@ -56,6 +58,9 @@ export class VideojuegosFormPage implements OnInit {
     audio_url: '',
   };
 
+  previewImagen: string = 'assets/icon/image.png';
+  audioSubido: boolean = false;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -69,6 +74,47 @@ export class VideojuegosFormPage implements OnInit {
     if (idParam) {
       this.id = Number(idParam);
       this.videojuego = await this.cancionService.obtenerPorId(this.id);
+
+      this.previewImagen =
+        this.videojuego.imagen_url || 'assets/icon/image.png';
+
+      this.audioSubido = !!this.videojuego.audio_url;
+    }
+  }
+
+  async subirImagen(event: any) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const fileName = `img_${Date.now()}`;
+
+    const { data } = await this.cancionService.subirArchivo(
+      'imagenes',
+      fileName,
+      file,
+    );
+
+    if (data?.publicUrl) {
+      this.videojuego.imagen_url = data.publicUrl;
+      this.previewImagen = data.publicUrl;
+    }
+  }
+
+  async subirAudio(event: any) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const fileName = `audio_${Date.now()}`;
+
+    const { data } = await this.cancionService.subirArchivo(
+      'audios',
+      fileName,
+      file,
+    );
+
+    if (data?.publicUrl) {
+      this.videojuego.audio_url = data.publicUrl;
+      this.audioSubido = true;
     }
   }
 
@@ -88,50 +134,13 @@ export class VideojuegosFormPage implements OnInit {
   }
 
   async guardar() {
-    if (this.videojuego.anio < 0) {
-      await this.mostrarToast('El año no puede ser negativo.', 'error');
-      return;
-    }
-
-    if (this.videojuego.ranking < 0) {
-      await this.mostrarToast('El ranking no puede ser negativo.', 'error');
-      return;
-    }
-
-    if (
-      !this.videojuego.titulo.trim() ||
-      !this.videojuego.artista.trim() ||
-      !this.videojuego.categorias?.trim() ||
-      !this.videojuego.imagen_url?.trim() ||
-      !this.videojuego.video_url?.trim() ||
-      !this.videojuego.audio_url?.trim()
-    ) {
-      await this.mostrarToast('Por favor, completa todos los campos.', 'error');
-
-      return;
-    }
-
-    if (this.videojuego.ranking === 0 || this.videojuego.anio === 0) {
-      await this.mostrarToast(
-        'El ranking y el año deben ser mayores que cero.',
-        'error',
-      );
-
-      return;
-    }
-
     if (this.id) {
       await this.cancionService.actualizar(this.id, this.videojuego);
     } else {
       await this.cancionService.crear(this.videojuego);
     }
 
-    await this.mostrarToast(
-      this.id
-        ? 'Canción actualizada correctamente'
-        : 'Canción creada correctamente',
-      'success',
-    );
+    await this.mostrarToast('Guardado correctamente', 'success');
 
     this.router.navigate(['/videojuegos']);
   }
