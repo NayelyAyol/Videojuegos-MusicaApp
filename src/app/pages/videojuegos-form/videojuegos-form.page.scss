@@ -1,201 +1,139 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap');
 
 .main-toolbar {
-  --background: #131a2f;
+  --background: #7c3aed;
   --border-color: transparent;
-
-  border-bottom:
-    1px solid rgba(56,189,248,.18);
 }
 
 .main-title {
   font-family: 'Nunito', sans-serif;
   font-weight: 800;
-  font-size: 1.05rem;
-
-  color: #f8fafc;
+  font-size: 1.1rem;
+  color: #ffffff;
 }
 
 .form-content {
-  --background: linear-gradient(
-    180deg,
-    #111827 0%,
-    #0f172a 100%
-  );
-
+  --background: #f5f0ff;
   --padding-top: 16px;
 }
 
 .fab-back {
-  --background: #38bdf8;
-  --background-hover: #22b8cf;
-  --background-activated: #22b8cf;
-
-  --color: #ffffff;
-
+  --background: #ffffff;
+  --background-activated: #ede9fe;
+  --color: #7c3aed;
   --border-radius: 14px;
-
-  box-shadow:
-    0 4px 12px rgba(56,189,248,.18);
+  --box-shadow: 0 4px 14px rgba(124, 58, 237, 0.15);
 }
 
 .preview-card {
   position: relative;
-
   width: 100%;
   max-width: 600px;
   height: 300px;
-
   margin: 56px auto 20px;
-
-  border-radius: 18px;
-
+  border-radius: 20px;
   overflow: hidden;
-
-  border:
-    1px solid rgba(255,255,255,.04);
-
-  box-shadow:
-    0 6px 18px rgba(0,0,0,.24);
+  box-shadow: 0 6px 24px rgba(124, 58, 237, 0.15);
 }
 
 .preview-img {
   width: 100%;
   height: 100%;
-
   object-fit: cover;
-
-  filter: brightness(.5);
+  filter: brightness(0.5);
 }
 
 .overlay {
   position: absolute;
   inset: 0;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   text-align: center;
   color: #ffffff;
-}
 
-.overlay h2 {
-  margin: 0;
-
-  font-size: 1.7rem;
-  font-weight: 800;
-
-  text-shadow:
-    0 2px 10px rgba(0,0,0,.45);
+  h2 {
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: 800;
+    text-shadow: 0 0 15px rgba(167, 139, 250, 0.5);
+  }
 }
 
 .form-card {
-  background: #1f2544;
-
-  border-radius: 18px;
-
-  border:
-    1px solid rgba(255,255,255,.04);
-
+  background: #ffffff;
+  border-radius: 20px;
+  border: 1.5px solid #ede9fe;
   padding: 20px 16px;
-
-  box-shadow:
-    0 4px 14px rgba(0,0,0,.22);
-
+  box-shadow: 0 4px 18px rgba(124, 58, 237, 0.08);
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
 }
 
 .fields-row {
   display: flex;
   gap: 10px;
-}
 
-.fields-row .half {
-  flex: 1;
+  .half {
+    flex: 1;
+  }
 }
 
 .field-item {
-  --background: rgba(255,255,255,.03);
-  --background-focused: rgba(255,255,255,.05);
-
+  --background: #ede9fe;
+  --background-focused: #ddd6fe;
   --border-color: transparent;
   --border-width: 0;
   --inner-border-width: 0;
-
   --border-radius: 12px;
-
   --padding-start: 12px;
   --inner-padding-end: 12px;
-
   --highlight-color-focused: transparent;
-
   border-radius: 12px;
-
   overflow: hidden;
+  margin-bottom: 4px;
 
-  margin-bottom: 5px;
-}
-
-.field-item.item-has-focus {
-  outline:
-    1px solid rgba(56,189,248,.45);
+  &.item-has-focus {
+    outline: 2px solid #a78bfa;
+  }
 }
 
 .field-label {
   font-family: 'Nunito', sans-serif !important;
-
-  font-size: .90rem !important;
+  font-size: 0.9rem !important;
   font-weight: 700 !important;
-
-  letter-spacing: .05em;
-
-  color: #67e8f9 !important;
-
+  letter-spacing: 0.06em;
+  color: #6d28d9 !important;
   text-transform: uppercase;
 }
 
 .field-input {
   font-family: 'Nunito', sans-serif !important;
-
-  font-size: .95rem !important;
+  font-size: 0.95rem !important;
   font-weight: 600 !important;
-
-  color: #ffffff !important;
-
-  --placeholder-color: #94a3b8;
+  color: #2e1065 !important;
+  --placeholder-color: #8b9cb8;
 }
 
 .btn-save {
   margin-top: 10px;
-
-  --background: #38bdf8;
-  --background-hover: #22b8cf;
-  --background-activated: #22b8cf;
-
+  --background: #7c3aed;
+  --background-hover: #6d28d9;
+  --background-activated: #6d28d9;
   --color: #ffffff;
-
   --border-radius: 14px;
-
-  box-shadow:
-    0 4px 12px rgba(56,189,248,.18);
-
+  --box-shadow: 0 6px 18px rgba(124, 58, 237, 0.3);
   font-family: 'Nunito', sans-serif;
   font-weight: 800;
-  font-size: .98rem;
-
-  letter-spacing: .01em;
-
+  font-size: 1rem;
+  letter-spacing: 0.02em;
   height: 50px;
-}
 
-.btn-save[disabled] {
-  --background: #334155;
-  --color: #94a3b8;
-
-  box-shadow: none;
-
-  opacity: 1;
+  &[disabled] {
+    --background: #ede9fe;
+    --color: #8b9cb8;
+    --box-shadow: none;
+    opacity: 1;
+  }
 }
