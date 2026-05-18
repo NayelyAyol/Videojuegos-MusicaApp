@@ -1,11 +1,18 @@
-import { Component } from '@angular/core';
-import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
+import { Component, OnInit } from '@angular/core';
+import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone'; 
+import { SplashScreen } from '@capacitor/splash-screen';
 
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
-  imports: [IonApp, IonRouterOutlet],
+  styleUrls: ['app.component.scss'],
+  standalone: true,
+  imports: [IonApp, IonRouterOutlet] 
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   constructor() {}
+
+  ngOnInit() {
+    SplashScreen.hide();
+  }
 }

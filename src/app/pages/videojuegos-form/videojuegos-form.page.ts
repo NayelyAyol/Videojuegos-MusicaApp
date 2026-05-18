@@ -65,7 +65,7 @@ export class VideojuegosFormPage implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private cancionService: CancionService,
-    private toastController: ToastController,
+    private toastController: ToastController
   ) {}
 
   async ngOnInit() {
@@ -91,7 +91,7 @@ export class VideojuegosFormPage implements OnInit {
     const { data } = await this.cancionService.subirArchivo(
       'imagenes',
       fileName,
-      file,
+      file
     );
 
     if (data?.publicUrl) {
@@ -109,7 +109,7 @@ export class VideojuegosFormPage implements OnInit {
     const { data } = await this.cancionService.subirArchivo(
       'audios',
       fileName,
-      file,
+      file
     );
 
     if (data?.publicUrl) {
@@ -134,14 +134,21 @@ export class VideojuegosFormPage implements OnInit {
   }
 
   async guardar() {
-    if (this.id) {
-      await this.cancionService.actualizar(this.id, this.videojuego);
-    } else {
-      await this.cancionService.crear(this.videojuego);
+    const data = { ...this.videojuego };
+    delete (data as any).id;
+
+    try {
+      if (this.id) {
+        await this.cancionService.actualizar(this.id, data);
+      } else {
+        await this.cancionService.crear(data);
+      }
+
+      await this.mostrarToast('Guardado correctamente', 'success');
+      this.router.navigate(['/videojuegos']);
+    } catch (error) {
+      await this.mostrarToast('Error al guardar los datos', 'error');
+      console.error(error);
     }
-
-    await this.mostrarToast('Guardado correctamente', 'success');
-
-    this.router.navigate(['/videojuegos']);
   }
 }

@@ -15,10 +15,9 @@ export interface Cancion {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CancionService {
-
   private supabase: SupabaseClient;
 
   constructor() {
@@ -69,9 +68,11 @@ export class CancionService {
   }
 
   async actualizar(id: number, cancion: Cancion) {
+    const { id: _, ...dataSinId } = cancion;
+
     const { data, error } = await this.supabase
       .from('canciones')
-      .update(cancion)
+      .update(dataSinId)
       .eq('id', id)
       .select();
 
@@ -93,33 +94,29 @@ export class CancionService {
     }
   }
 
-
   async subirArchivo(bucket: string, fileName: string, file: File) {
-
     const filePath = `uploads/${fileName}`;
 
-    const { data, error } = await this.supabase
-      .storage
+    const { data, error } = await this.supabase.storage
       .from(bucket)
       .upload(filePath, file, {
         cacheControl: '3600',
-        upsert: true
+        upsert: true,
       });
 
     if (error) {
       throw error;
     }
 
-    const { data: urlData } = this.supabase
-      .storage
+    const { data: urlData } = this.supabase.storage
       .from(bucket)
       .getPublicUrl(filePath);
 
     return {
       data: {
-        publicUrl: urlData.publicUrl
+        publicUrl: urlData.publicUrl,
       },
-      error: null
+      error: null,
     };
   }
 }
