@@ -23,7 +23,13 @@ export class CancionService {
   constructor() {
     this.supabase = createClient(
       environment.supabaseUrl,
-      environment.supabaseKey
+      environment.supabaseKey,
+      {
+        auth: {
+          lockType: 'custom',
+          acquireTimeout: 3000,
+        } as any
+      }
     );
   }
 

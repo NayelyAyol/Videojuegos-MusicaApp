@@ -1,23 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import {
   IonHeader, IonToolbar, IonTitle, IonContent, IonButton,
-  IonFab, IonFabButton,
-IonGrid,
-IonRow,
-IonCol,
-IonCard,
-IonCardContent,
-IonIcon} from '@ionic/angular/standalone';
+  IonFab, IonFabButton, IonGrid, IonRow, IonCol, IonCard,
+  IonCardContent, IonIcon, 
+  AlertController
+} from '@ionic/angular/standalone'; 
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { CancionService, Cancion } from '../../services/videojuegos';
-import { AlertController } from '@ionic/angular';
 import { addIcons } from 'ionicons';
 import { add } from 'ionicons/icons';
-import {
-  DomSanitizer,
-  SafeResourceUrl
-} from '@angular/platform-browser';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 addIcons({
   add
