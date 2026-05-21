@@ -89,6 +89,9 @@ En Storage
 
 <img width="1331" height="566" alt="image" src="https://github.com/user-attachments/assets/358ef276-b343-48f6-b71a-9a7d00a03966" />
 
+| Imágenes en Supabase      | Audios en Supabase    |
+| ---------- | ------- |
+| <img width="958" height="874" alt="image" src="https://github.com/user-attachments/assets/d4a967bb-3806-4eb1-a3a1-b38da75563bd" />| <img width="929" height="899" alt="image" src="https://github.com/user-attachments/assets/eb6995af-f017-40ff-b643-97a8976d5eb5" />|
 
 ---
 
