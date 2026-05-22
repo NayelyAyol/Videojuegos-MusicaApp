@@ -590,6 +590,24 @@ npx cap open android
 
 ---
 
+## Capturas del sitio web funcionando
+
+| Catálogo de canciones                      | Formulario de registro                     |
+| ------------------------------------------ | ------------------------------------------ |
+| <img width="600" alt="image" src="https://github.com/user-attachments/assets/19b1622a-0629-40a9-84ab-37c62798f58b" /> | <img width="600"  alt="image" src="https://github.com/user-attachments/assets/8e92bcba-37bd-433f-8d9d-5f15fbdb2d36" />|
+
+| Editar Canción                       | Video de YouTube                           |
+| ------------------------------------------ | ------------------------------------------ |
+| <img width="600" alt="image" src="https://github.com/user-attachments/assets/c20a34d4-c185-4223-80e3-a85d07dc2a82" /> | <img width="600" alt="image" src="https://github.com/user-attachments/assets/4d8ed8a6-a5ec-4c33-aee0-665a935d4cef" />|
+
+| Toast personalizado                        | Alert de eliminación                       |
+| ------------------------------------------ | ------------------------------------------ |
+| <img width="600" lt="image" src="https://github.com/user-attachments/assets/3fb4a85d-3133-4c90-a78d-4a4a6395e463" /> | <img width="600" alt="image" src="https://github.com/user-attachments/assets/9f3eab63-92d1-4596-bbdd-dd2d76208e9f" />|
+
+### Link del sitio
+- https://appmusic-8359f.web.app/videojuegos
+
+---
 ### App en ejecución en celular
 
 https://github.com/user-attachments/assets/aaffad43-f9a4-4403-92cc-1ddd3e52d952
